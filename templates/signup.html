@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form method="POST">
+	<input type="text" name="username">
+	<input type="password" name="password">
+	{% module xsrf_form_html() %}
+	<input type="submit">
+</form>
+{% end %}

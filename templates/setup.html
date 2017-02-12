@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<script type="text/javascript">
+function addFood(){
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById("add-food").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("PUT", "/setup", true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+	xmlhttp.send("food_name=" + document.getElementById("food_name").value);
+}
+</script>
+
+	{% module xsrf_form_html() %}
+	{% if current_user.role == "audit" %}
+
+
+		增加食物: <input class="input" type="text" name="food_name" value="food name">
+		<p id="add-food"></p>
+		<button type="button" class="btn btn-default" onclick="addFood()">确定</button> <br>
+
+		{% if stop %}
+		  <p>当前不能点餐, 是否开放点餐?</p>
+			<button type="button" class="btn btn-default" onclick="stopOrder()">开放</button>
+		{% else %}
+		  <p>当前可以点餐, 是否停止点餐?</p>
+			<button type="button" class="btn btn-default" onclick="startOrder()">停止</button>
+		{% end %}
+
+	{% end %}
+
+	{% if current_user.role == "admin" %}
+
+		设置管理员: <input type="text" name="username">
+		<button type="button" class="btn btn-default">确定</button> <br>
+
+	{% end %}
+
+	{% if not current_user.email %}
+
+		补充邮箱: <input type="text" name="email"><br>
+		<p id="add-email"></p>
+		<button type="button" class="btn btn-default" onclick="addEmail()">确定</button> <br>
+
+	{% end %}
+
+	<h2>用户信息</h2>
+	<p>姓名: {{ current_user.username }}</p>
+	<p>邮箱: {{ current_user.email }}</p>
+
+
+{% end %}
+
+<script type="text/javascript">
+
+
+
+function addEmail(){
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.opreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById("add-email").innterHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("PUT", "/setup", true);
+	xmlhttp.send({{ "email=the name" }});
+}
+
+</script>

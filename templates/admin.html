@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+  {% if not stop %}
+	  <p> 当前可以点餐, 是否停止? </p>
+		<button onclick="stopOrder()">停止点餐</button><br>
+	{% end %}
+	{% if stop %}
+	  <p> 是否开始点餐?</p>
+	  <button onclick="startOrder()">开始点餐</button><br>
+	{% end %}
+{% end %}

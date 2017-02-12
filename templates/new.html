@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form method="POST">
+	{% for food in foods %}
+	<input type="radio" name="food_name" value={{ food.food_name }} checked> {{ food.food_name }} <br>
+	{% end %}
+	{% module xsrf_form_html() %}
+	<input type="submit", value="提交">
+</form> 
+{% end %}

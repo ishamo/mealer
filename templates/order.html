@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+<form method="POST">
+	<input type="radio" value="{{ order.food.food_name }}" checked>
+	{% for food in foods %}
+	  {% if not food.food_name == order.food.food_name %}
+			<input type="radio" value="{{ food.food_name }}">
+		{% end %}
+	{% end %}
+</form>
+{% end %}

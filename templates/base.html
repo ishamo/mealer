@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> mealer </title>
+<link rel="stylesheet" href="{{ static_url("bootstrap.css") }}" type="text/css">
+<link rel="stylesheet" href="{{ static_url("app.css") }}" type="text/css">
+{% block head %}{% end %}
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+		<ul class="nav navbar-nav navbar-default">
+			<div class="navbar-header">
+			  <a class="navbar-brand"	href="/">EISOO</a>
+		  </div>
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			{% if current_user %}
+				
+					{% if current_user.role in ["admin", "audit"] %}
+						<li><a href="/admin">管理</a></li>	
+					{% end %}
+
+					<li><a href="/setup">设置</a></li>
+					<li><a href="/logout">退出</a></li>
+
+			{% else %}
+
+					<li><a href="/login">登录</a></li>
+					<li><a href="/signup">注册</a></li>
+
+			{% end %}
+		</ul>
+	</div>
+</nav>
+
+<script type="text/javascript" src="{{ static_url("jquery.js") }}"></script>
+
+<div class="container">
+	{% block body %}{% end %}
+</div>
+
+</body>
+</html>

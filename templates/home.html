@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% if not stop %}
+	<a href="/new">
+		<button type="button" class="btn btn-default">增加</button>
+	</a>
+{% end %}
+<table id="home-table" class="table table-striped">
+	<tr><th>用户</th><th>菜品</th><th>时间</th><th>操作</th></tr>
+	{% for order in orders %}
+		{% module Entry(order) %}
+	{% end %}
+</table>
+{% end %}

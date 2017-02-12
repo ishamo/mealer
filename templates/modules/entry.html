@@ -1,0 +1,15 @@
+<tr>
+<td>{{ order.user.username }} </td>
+<td>{{ order.food.food_name }} </td>
+<td>{{ order.updated_at }} </td>
+<td>
+	<a href="/order/id">
+		<button type="button" class="btn btn-default">更改</button>
+	</a>
+	{% if current_user.role in ["admin", "audit"] %}
+		<a href="/order/id">
+			<button type="button" onclick="deleteOrder(id)" class="btn btn-deafult">删除</button>
+		</a>
+	{% end %}
+</td>
+</tr>
